@@ -1,9 +1,17 @@
-use std::fs;
+use std::{fs,env};
 
 fn main() {
+    let args: Vec<String> = env::args().collect();
+
+    if args.len() <= 1 {
+        println!("Usage: {} [directory]", args[0]);
+        println!("Will produce a 'output.json' fusing all the .json files in the specified directory.");
+        return;
+    }
+
     println!("Generating one compacted json file...");
 
-    let directory = "./data";
+    let directory = args[1].as_str();
     let output_file = "output.json";
     let mut content = String::new();
 
